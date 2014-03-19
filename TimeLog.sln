@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeLog", "TimeLog\TimeLog.csproj", "{57A13D55-CB9E-4291-854F-79C3FA3B510D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57A13D55-CB9E-4291-854F-79C3FA3B510D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57A13D55-CB9E-4291-854F-79C3FA3B510D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57A13D55-CB9E-4291-854F-79C3FA3B510D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57A13D55-CB9E-4291-854F-79C3FA3B510D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
