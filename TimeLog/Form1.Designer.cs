@@ -77,7 +77,7 @@
             // 
             // myTimer
             // 
-            this.myTimer.Interval = 10;
+            this.myTimer.Interval = 1000;
             this.myTimer.Tick += new System.EventHandler(this.myTimer_Tick);
             // 
             // Form1
