@@ -31,18 +31,36 @@ namespace TimeLog
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            btnEdit.Enabled = false;
+            btnLock.Enabled = false;
+            btnStart.Enabled = false;
+            btnStop.Enabled = true;
+            btnSave.Enabled = false;
+
             myTimer.Start();
             startTime = DateTime.Now;
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
+            btnEdit.Enabled = true;
+            btnLock.Enabled = false;
+            btnStart.Enabled = false; //TODO: Add stopping/startting/resetting
+            btnStop.Enabled = false;
+            btnSave.Enabled = true;
+
             myTimer.Stop();
             endTime = DateTime.Now;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            btnEdit.Enabled = false;
+            btnLock.Enabled = false;
+            btnStart.Enabled = true; //TODO: Reset after a save?
+            btnStop.Enabled = true;
+            btnSave.Enabled = false;
+
             try
             {
                 var existingFile = new FileInfo("TimeLog.xlsx");
@@ -73,7 +91,19 @@ namespace TimeLog
                                         currentWorksheet.Cells[rowNumber, 1].Value = startTime.ToString();
                                         currentWorksheet.Cells[rowNumber, 2].Value = endTime.ToString();
                                         currentWorksheet.Cells[rowNumber, 3].Value = 0.1 * Math.Ceiling(10 * (timeCounter / (60.0 * 60.0)));
-                                        package.Save();
+                                        try
+                                        {
+                                            package.Save();
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            showError(ex.ToString());
+                                            showError(ex.Message);
+                                        }
+                                        finally
+                                        {
+                                            showError("Save complete!");
+                                        }
                                     }
                                 }
                             }
@@ -91,6 +121,31 @@ namespace TimeLog
                 showError(ex.ToString());
                 showError(ex.Message);
             }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            showError("Note that if you edit the time, then it will not match up with the Start Time and End Time");
+
+            btnEdit.Enabled = false;
+            btnLock.Enabled = true;
+            btnStart.Enabled = false;
+            btnStop.Enabled = false;
+            btnSave.Enabled = false;
+
+            theTime.Enabled = true;
+        }
+
+        private void btnLock_Click(object sender, EventArgs e)
+        {
+            btnEdit.Enabled = true;
+            btnLock.Enabled = false;
+            btnStart.Enabled = false;
+            btnStop.Enabled = false;
+            btnSave.Enabled = true;
+
+            theTime.Enabled = false;
+            timeCounter = (int)TimeSpan.Parse(theTime.Text).TotalSeconds;
         }
 
         private void showError(string theError)
