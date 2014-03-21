@@ -36,6 +36,7 @@
             this.theTime = new System.Windows.Forms.TextBox();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnLock = new System.Windows.Forms.Button();
+            this.btnReset = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnStart
@@ -106,11 +107,23 @@
             this.btnLock.UseVisualStyleBackColor = true;
             this.btnLock.Click += new System.EventHandler(this.btnLock_Click);
             // 
+            // btnReset
+            // 
+            this.btnReset.Enabled = false;
+            this.btnReset.Location = new System.Drawing.Point(174, 70);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(75, 23);
+            this.btnReset.TabIndex = 7;
+            this.btnReset.Text = "Reset";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(263, 130);
+            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnLock);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.theTime);
@@ -119,6 +132,7 @@
             this.Controls.Add(this.btnStart);
             this.Name = "Form1";
             this.Text = "Excel Timer";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -133,6 +147,7 @@
         private System.Windows.Forms.TextBox theTime;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnLock;
+        private System.Windows.Forms.Button btnReset;
     }
 }
 

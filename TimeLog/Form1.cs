@@ -22,8 +22,6 @@ namespace TimeLog
         private DateTime endTime = new DateTime();
         int startRow = 1;
 
-        string path = Directory.GetCurrentDirectory();
-
         public Form1()
         {
             InitializeComponent();
@@ -36,6 +34,7 @@ namespace TimeLog
             btnStart.Enabled = false;
             btnStop.Enabled = true;
             btnSave.Enabled = false;
+            btnReset.Enabled = false;
 
             myTimer.Start();
             startTime = DateTime.Now;
@@ -45,9 +44,10 @@ namespace TimeLog
         {
             btnEdit.Enabled = true;
             btnLock.Enabled = false;
-            btnStart.Enabled = false; //TODO: Add stopping/startting/resetting
+            btnStart.Enabled = true;
             btnStop.Enabled = false;
             btnSave.Enabled = true;
+            btnReset.Enabled = true;
 
             myTimer.Stop();
             endTime = DateTime.Now;
@@ -57,9 +57,10 @@ namespace TimeLog
         {
             btnEdit.Enabled = false;
             btnLock.Enabled = false;
-            btnStart.Enabled = true; //TODO: Reset after a save?
+            btnStart.Enabled = true;
             btnStop.Enabled = true;
             btnSave.Enabled = false;
+            btnReset.Enabled = false;
 
             try
             {
@@ -114,6 +115,7 @@ namespace TimeLog
                         }
                     }
                     workBook = null;
+                    reset();
                 }
             }
             catch (Exception ex)
@@ -132,6 +134,7 @@ namespace TimeLog
             btnStart.Enabled = false;
             btnStop.Enabled = false;
             btnSave.Enabled = false;
+            btnReset.Enabled = false;
 
             theTime.Enabled = true;
         }
@@ -143,9 +146,21 @@ namespace TimeLog
             btnStart.Enabled = false;
             btnStop.Enabled = false;
             btnSave.Enabled = true;
+            btnReset.Enabled = true;
 
             theTime.Enabled = false;
             timeCounter = (int)TimeSpan.Parse(theTime.Text).TotalSeconds;
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            reset();
+        }
+
+        private void myTimer_Tick(object sender, EventArgs e)
+        {
+            timeCounter++;
+            theTime.Text = (timeCounter / (60 * 60)).ToString().PadLeft(2, '0') + ":" + ((timeCounter / 60) % 60).ToString().PadLeft(2, '0') + ":" + (timeCounter % 60).ToString().PadLeft(2, '0');
         }
 
         private void showError(string theError)
@@ -153,10 +168,25 @@ namespace TimeLog
             MessageBox.Show(theError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
         }
 
-        private void myTimer_Tick(object sender, EventArgs e)
+        private void reset()
         {
-            timeCounter++;
-            theTime.Text = (timeCounter / (60 * 60)).ToString().PadLeft(2, '0') + ":" + ((timeCounter / 60) % 60).ToString().PadLeft(2, '0') + ":" + (timeCounter % 60).ToString().PadLeft(2, '0');
+            btnEdit.Enabled = false;
+            btnLock.Enabled = false;
+            btnStart.Enabled = true;
+            btnStop.Enabled = false;
+            btnSave.Enabled = false;
+            btnReset.Enabled = false;
+
+            //startTime = null;
+            //endTime = null;
+
+            timeCounter = 0;
+            theTime.Text = "00:00:00";
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
